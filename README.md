@@ -86,6 +86,10 @@ This knowledge base is designed to work with [build-your-knowledge](https://gith
 | **RL** | Algorithms, infrastructure, frameworks for reinforcement learning |
 | **Agent** | LLM agents, tool use, multi-agent systems, production deployment |
 
+## Generating Content with AI
+
+See [PROMPT.md](PROMPT.md) for a ready-to-use prompt when asking LLMs (Claude, GPT, etc.) to help generate or expand your knowledge base.
+
 ## Contributing
 
 When adding new content:
