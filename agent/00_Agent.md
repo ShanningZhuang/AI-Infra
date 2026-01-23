@@ -59,6 +59,12 @@ Agent infrastructure is the systems layer that enables LLMs to take actions in t
 | Agent Serving | [04_Serving.md](04_Serving.md) | ★★★★☆ |
 | Production Considerations | [05_Production.md](05_Production.md) | ★★★★☆ |
 
+### Training & RL
+
+| Topic | File | Priority |
+|-------|------|----------|
+| Agent Training & RL | [06_Agent_Training.md](06_Agent_Training.md) | ★★★★★ |
+
 ---
 
 ## The Agent Stack
@@ -93,6 +99,11 @@ Agent infrastructure is the systems layer that enables LLMs to take actions in t
 | [Voyager](https://arxiv.org/abs/2305.16291) | 2023 | Skill library, curriculum |
 | [Language Agent Tree Search](https://arxiv.org/abs/2310.04406) | 2023 | MCTS for agents |
 | [AgentBench](https://arxiv.org/abs/2308.03688) | 2023 | Agent evaluation |
+| [WebRL](https://arxiv.org/abs/2411.02337) | 2024 | Self-evolving web agent RL (ICLR 2025) |
+| [WebAgent-R1](https://arxiv.org/abs/2505.16421) | 2025 | Multi-turn RL for web agents (EMNLP 2025) |
+| [UI-R1](https://arxiv.org/abs/2503.21620) | 2025 | Rule-based RL for GUI agents |
+| [Agent-RLVR](https://arxiv.org/abs/2506.11425) | 2025 | Guided RL for SWE agents |
+| [SWE-RL](https://arxiv.org/abs/2512.18552) | 2025 | Self-play for SWE agents |
 
 ## Key Blogs & Resources
 
@@ -101,6 +112,10 @@ Agent infrastructure is the systems layer that enables LLMs to take actions in t
 - [OpenAI Function Calling Guide](https://platform.openai.com/docs/guides/function-calling)
 - [Anthropic Tool Use Guide](https://docs.anthropic.com/claude/docs/tool-use)
 - [Lilian Weng: LLM Powered Autonomous Agents](https://lilianweng.github.io/posts/2023-06-23-agent/)
+- [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) - Anthropic's standard for tool connections
+- [Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk) - Building agents on Claude
+- [OpenAI Codex Skills](https://developers.openai.com/codex/skills/) - Task-specific agent capabilities
+- [Agentic AI Foundation](https://openai.com/index/agentic-ai-foundation/) - Industry standards
 
 ---
 

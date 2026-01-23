@@ -175,6 +175,14 @@
 - [ ] Safety guardrails and sandboxing
 - [ ] Cost monitoring and optimization
 
+### 6.6 Agent Training & RL → [Notes](agent/06_Agent_Training.md) ← NEW (2025)
+- [ ] Agent-RLVR (guidance for sparse rewards)
+- [ ] WebAgent-R1 / WebRL (web agent training)
+- [ ] UI-R1 (GUI agent training)
+- [ ] DeepSWE / SWE-RL (coding agent training)
+- [ ] Industry approaches (OpenAI Codex, Anthropic Computer Use)
+- [ ] Open standards (MCP, AGENTS.md, Agent Skills)
+
 ---
 
 ## Suggested Weekly Schedule
@@ -208,6 +216,7 @@
 3. **RL/Alignment**: InstructGPT (RLHF), DPO, GRPO (DeepSeek-R1)
 4. **Inference**: vLLM (PagedAttention), SGLang
 5. **Agents**: ReAct, Toolformer, "Language Agents" survey papers
+6. **Agent RL (2025)**: Agent-RLVR, WebAgent-R1 (EMNLP), WebRL (ICLR), UI-R1, DeepSWE
 
 ---
 
