@@ -25,6 +25,7 @@ Batching is crucial for LLM inference efficiency. Unlike training where batch si
 ### Blogs & Tutorials
 
 - [Anyscale: How Continuous Batching Enables 23x Throughput](https://www.anyscale.com/blog/continuous-batching-llm-inference)
+- [HuggingFace: How Continuous Batching Enables 23x Throughput in LLM Inference](https://huggingface.co/blog/continuous_batching)
 - [vLLM Scheduling Deep Dive](https://docs.vllm.ai/en/latest/design/kernel/paged_attention.html)
 
 ### Code References
