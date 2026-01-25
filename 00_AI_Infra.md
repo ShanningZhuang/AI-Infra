@@ -5,6 +5,8 @@
 
 ## Overview: The AI Infra Stack (Bottom to Top)
 
+![AI Infrastructure Stack](structure.jpeg)
+
 ```
 ┌─────────────────────────────────────────────┐
 │           Agent Infrastructure              │  ← Your focus area

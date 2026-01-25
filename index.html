@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Infrastructure Knowledge Base</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Patrick+Hand&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Patrick Hand', cursive;
+            background: #fefefe;
+            min-height: 100vh;
+            padding: 30px;
+            background-image:
+                linear-gradient(rgba(200, 200, 200, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(200, 200, 200, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .title {
+            text-align: center;
+            font-family: 'Caveat', cursive;
+            font-size: 2.8em;
+            color: #333;
+            margin-bottom: 10px;
+            text-decoration: underline;
+            text-decoration-style: wavy;
+            text-underline-offset: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .main-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr 280px;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .box {
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 15px;
+            background: #fff;
+            position: relative;
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .box:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.15);
+        }
+
+        .box-title {
+            font-family: 'Caveat', cursive;
+            font-size: 1.5em;
+            font-weight: 600;
+            border-bottom: 2px dashed #ccc;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        .box-content {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .box-content a {
+            color: #555;
+            text-decoration: none;
+            display: block;
+            padding: 3px 0;
+            border-bottom: 1px dotted #ddd;
+        }
+
+        .box-content a:hover {
+            color: #000;
+            background: #f5f5f5;
+            padding-left: 5px;
+        }
+
+        .highlight-green {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+        }
+
+        .highlight-blue {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        }
+
+        .highlight-orange {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+        }
+
+        .highlight-purple {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+        }
+
+        .highlight-pink {
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+        }
+
+        /* Center column - main stack */
+        .center-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .stack-item {
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            background: #fff;
+            text-align: center;
+            position: relative;
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .stack-item:hover {
+            transform: scale(1.02);
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.15);
+        }
+
+        .stack-item h3 {
+            font-family: 'Caveat', cursive;
+            font-size: 1.6em;
+            margin-bottom: 8px;
+        }
+
+        .stack-item p {
+            font-size: 1em;
+            color: #666;
+        }
+
+        .arrow-down {
+            text-align: center;
+            font-size: 2em;
+            color: #999;
+            margin: -5px 0;
+        }
+
+        /* Side panels */
+        .side-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Connector lines */
+        .connector {
+            position: relative;
+        }
+
+        .connector::before {
+            content: '→';
+            position: absolute;
+            font-size: 1.5em;
+            color: #999;
+        }
+
+        /* Tags */
+        .tag {
+            display: inline-block;
+            font-size: 0.85em;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin: 2px;
+            border: 1px solid #999;
+        }
+
+        .tag-deep { background: #ffcdd2; }
+        .tag-medium { background: #fff9c4; }
+        .tag-light { background: #c8e6c9; }
+
+        /* Footer section */
+        .footer-section {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        /* Hand-drawn border effect */
+        .sketchy {
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+        }
+
+        /* Priority stars */
+        .stars {
+            color: #ffa000;
+            font-size: 0.9em;
+        }
+
+        /* Learning path header */
+        .learning-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid #333;
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+        }
+
+        .learning-header h2 {
+            font-family: 'Caveat', cursive;
+            font-size: 2em;
+        }
+
+        /* Model examples section */
+        .models-section {
+            margin-top: 30px;
+            text-align: center;
+            padding: 15px;
+            border: 2px dashed #999;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+
+        .models-section span {
+            display: inline-block;
+            margin: 5px 10px;
+            padding: 5px 15px;
+            border: 1px solid #666;
+            border-radius: 20px;
+            background: #fff;
+            font-size: 1.1em;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .side-panel {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .side-panel .box {
+                flex: 1;
+                min-width: 250px;
+                max-width: 350px;
+            }
+        }
+
+        /* Phase indicators */
+        .phase {
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            background: #333;
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-size: 0.8em;
+        }
+
+        /* Link styling */
+        a.stack-link {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">AI Infrastructure Knowledge Base</h1>
+        <p class="subtitle">A structured learning path from GPU fundamentals to Agent systems</p>
+
+        <div class="learning-header sketchy">
+            <h2>How to Learn AI Infrastructure</h2>
+            <p>6 phases • 16+ weeks • ~1 hour/day</p>
+        </div>
+
+        <div class="main-layout">
+            <!-- Left Panel -->
+            <div class="side-panel">
+                <div class="box highlight-blue">
+                    <div class="box-title">Data & Preprocessing</div>
+                    <div class="box-content">
+                        <span class="tag">Tokenization</span>
+                        <span class="tag">Filter/Cleaning</span>
+                        <span class="tag">Data Pipeline</span>
+                        <span class="tag">Dataset Formats</span>
+                    </div>
+                </div>
+
+                <div class="box highlight-purple">
+                    <div class="box-title">Model Architecture</div>
+                    <div class="box-content">
+                        <span class="tag">Attention/MoE</span>
+                        <span class="tag">Long Context</span>
+                        <span class="tag">Positional Enc.</span>
+                        <span class="tag">Optimizers</span>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="box-title">Evaluation</div>
+                    <div class="box-content">
+                        <span class="tag">Benchmarks</span>
+                        <span class="tag">Human Eval</span>
+                        <span class="tag">Safety Tests</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Center Stack - Main Learning Path -->
+            <div class="center-stack">
+                <a href="agent/00_Agent.md" class="stack-link">
+                    <div class="stack-item highlight-green">
+                        <span class="phase">Phase 6</span>
+                        <h3>Agent Infrastructure</h3>
+                        <p>ReAct • Tool Use • Memory • Multi-Agent • Production</p>
+                        <div class="stars">★★★★★ Deep Focus</div>
+                    </div>
+                </a>
+
+                <div class="arrow-down">↑</div>
+
+                <a href="inference/00_Inference.md" class="stack-link">
+                    <div class="stack-item highlight-orange">
+                        <span class="phase">Phase 5</span>
+                        <h3>Serving & Inference</h3>
+                        <p>KV Cache • PagedAttention • Batching • Quantization</p>
+                        <div class="stars">★★★★☆ Medium-Deep</div>
+                    </div>
+                </a>
+
+                <div class="arrow-down">↑</div>
+
+                <a href="rl/00_RL.md" class="stack-link">
+                    <div class="stack-item highlight-pink">
+                        <span class="phase">Phase 4</span>
+                        <h3>RL & Alignment (RLHF)</h3>
+                        <p>PPO • DPO • GRPO • Reward Modeling • RLOO</p>
+                        <div class="stars">★★★★☆ Medium-Deep</div>
+                    </div>
+                </a>
+
+                <div class="arrow-down">↑</div>
+
+                <a href="distributed/00_Distributed.md" class="stack-link">
+                    <div class="stack-item highlight-blue">
+                        <span class="phase">Phase 3</span>
+                        <h3>Distributed Training Systems</h3>
+                        <p>DP • TP • PP • SP • EP • ZeRO • FSDP</p>
+                        <div class="stars">★★★☆☆ Conceptual</div>
+                    </div>
+                </a>
+
+                <div class="arrow-down">↑</div>
+
+                <a href="basic/00_Basic.md" class="stack-link">
+                    <div class="stack-item highlight-purple">
+                        <span class="phase">Phase 2</span>
+                        <h3>Compute Optimization (Kernels)</h3>
+                        <p>MatMul • Flash Attention • Triton • Kernel Fusion</p>
+                        <div class="stars">★★★☆☆ Conceptual</div>
+                    </div>
+                </a>
+
+                <div class="arrow-down">↑</div>
+
+                <a href="basic/00_Basic.md" class="stack-link">
+                    <div class="stack-item">
+                        <span class="phase">Phase 1</span>
+                        <h3>CUDA / GPU Programming</h3>
+                        <p>Streams • Graphs • Memory Coalescing • Synchronization</p>
+                        <div class="stars">★★☆☆☆ Light</div>
+                    </div>
+                </a>
+
+                <div class="arrow-down">↑</div>
+
+                <a href="basic/01_GPU_Fundamentals.md" class="stack-link">
+                    <div class="stack-item" style="background: #f5f5f5;">
+                        <h3>Hardware (GPU Architecture)</h3>
+                        <p>SMs • Warps • Memory Hierarchy • Tensor Cores</p>
+                        <div class="stars">★★☆☆☆ Light</div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Right Panel - Details -->
+            <div class="side-panel">
+                <div class="box highlight-green">
+                    <div class="box-title">Agent Topics</div>
+                    <div class="box-content">
+                        <a href="agent/01_Fundamentals.md">→ Fundamentals & ReAct</a>
+                        <a href="agent/02_Execution.md">→ Execution & Tools</a>
+                        <a href="agent/03_Multi_Agent.md">→ Multi-Agent Systems</a>
+                        <a href="agent/04_Serving.md">→ Agent Serving</a>
+                        <a href="agent/05_Production.md">→ Production & Safety</a>
+                        <a href="agent/06_Agent_Training.md">→ Agent Training (RL)</a>
+                    </div>
+                </div>
+
+                <div class="box highlight-orange">
+                    <div class="box-title">Inference Topics</div>
+                    <div class="box-content">
+                        <a href="inference/01_KV_Cache.md">→ KV Cache / PagedAttn</a>
+                        <a href="inference/02_Batching.md">→ Continuous Batching</a>
+                        <a href="inference/03_Speculative_Decoding.md">→ Speculative Decoding</a>
+                        <a href="inference/04_Quantization.md">→ Quantization</a>
+                        <a href="inference/05_Frameworks.md">→ vLLM / TensorRT-LLM</a>
+                    </div>
+                </div>
+
+                <div class="box highlight-pink">
+                    <div class="box-title">RL Topics</div>
+                    <div class="box-content">
+                        <a href="rl/01_Algorithms.md">→ PPO / DPO / GRPO</a>
+                        <a href="rl/02_Infrastructure.md">→ RL Infrastructure</a>
+                        <a href="rl/03_Frameworks.md">→ TRL / OpenRLHF</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer with example frameworks -->
+        <div class="footer-section">
+            <div class="box">
+                <div class="box-title">Training Frameworks</div>
+                <div class="box-content">
+                    <span class="tag">DeepSpeed</span>
+                    <span class="tag">Megatron-LM</span>
+                    <span class="tag">FSDP</span>
+                    <span class="tag">PyTorch</span>
+                    <span class="tag">JAX</span>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-title">Inference Frameworks</div>
+                <div class="box-content">
+                    <span class="tag">vLLM</span>
+                    <span class="tag">TensorRT-LLM</span>
+                    <span class="tag">SGLang</span>
+                    <span class="tag">llama.cpp</span>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-title">Agent Frameworks</div>
+                <div class="box-content">
+                    <span class="tag">LangGraph</span>
+                    <span class="tag">AutoGen</span>
+                    <span class="tag">CrewAI</span>
+                    <span class="tag">MCP</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Models Section -->
+        <div class="models-section">
+            <p style="font-family: 'Caveat', cursive; font-size: 1.4em; margin-bottom: 10px;">Reference Models & Systems</p>
+            <span>DeepSeek-R1</span>
+            <span>Qwen-3</span>
+            <span>Llama-4</span>
+            <span>GLM4.5</span>
+            <span>Claude</span>
+            <span>GPT-4</span>
+            <span>Gemini</span>
+        </div>
+
+        <!-- Quick stats -->
+        <div style="text-align: center; margin-top: 30px; color: #888; font-size: 1em;">
+            <p>42 markdown files • 5 topic areas • 8 diagrams • 50+ papers referenced</p>
+            <p style="margin-top: 10px;">
+                <a href="00_AI_Infra.md" style="color: #666;">📖 Main Index</a> •
+                <a href="README.md" style="color: #666;">📋 README</a> •
+                <a href="PROMPT.md" style="color: #666;">🤖 LLM Prompt</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

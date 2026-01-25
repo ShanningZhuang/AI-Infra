@@ -2,6 +2,8 @@
 
 A structured collection of notes on AI infrastructure, covering GPU programming, distributed systems, inference optimization, reinforcement learning, and AI agents.
 
+![AI Infrastructure Stack](structure.jpeg)
+
 ## Folder Structure
 
 ```
