@@ -332,3 +332,87 @@ model = AutoGPTQForCausalLM.from_pretrained(
 model.quantize(calibration_data)
 model.save_quantized("llama-2-70b-4bit-gptq")
 ```
+
+### FAQ: Quantization in Production
+
+**Q: Given scaling laws show more parameters = more intelligence, do frontier labs (OpenAI, Anthropic) use quantization to fit more parameters, or full precision with fewer parameters?**
+
+A: This is a common misconception. The choice isn't "quantized large model vs full-precision small model" — frontier labs do both optimally:
+
+```
+Training vs Inference: Different Precision Strategies
+
+Training Phase:
+┌─────────────────────────────────────────────────────────────┐
+│  ALWAYS full precision (BF16/FP16)                          │
+│  - Gradient updates need precision                          │
+│  - Training cost is fixed (one-time)                        │
+│  - Scaling laws apply here → maximize parameters            │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+                         Model weights
+                              ↓
+Inference Phase:
+┌─────────────────────────────────────────────────────────────┐
+│  May use quantization (FP8, INT8) for serving               │
+│  - Reduces memory/cost per request                          │
+│  - Acceptable quality loss for production                   │
+│  - This is AFTER training the largest model possible        │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**Key insight**: Quantization is an *inference optimization*, not a training choice. Frontier labs:
+
+1. **Train** the largest model they can afford in full precision (BF16)
+2. **Serve** that model with mild quantization (FP8/INT8) if quality permits
+
+```
+What OpenAI/Anthropic likely do:
+
+                    Training Budget
+                          │
+                          ▼
+    ┌─────────────────────────────────────────┐
+    │ Train largest model possible in BF16    │
+    │ (e.g., GPT-4 ~1.8T params, Claude ~???) │
+    └─────────────────────────────────────────┘
+                          │
+                          ▼
+    ┌─────────────────────────────────────────┐
+    │ For serving, may use:                   │
+    │ - FP8 for compute (2x speedup)          │
+    │ - KV cache in FP8/INT8                  │
+    │ - NOT aggressive INT4 (quality loss)    │
+    └─────────────────────────────────────────┘
+```
+
+**Why not train a quantized model directly?**
+
+| Approach | Parameters | Quality | Why not? |
+|----------|------------|---------|----------|
+| Train 70B in INT4 | 70B | Poor | Gradients don't work well in low precision |
+| Train 70B in BF16 | 70B | Best | ✓ Standard approach |
+| Train 280B in INT4 | 280B | Mediocre | Training instability, INT4 training not mature |
+| Train 280B in BF16, quantize to INT8 for serving | 280B | Very good | ✓ Best of both worlds |
+
+**The real trade-off frontier labs face:**
+
+```
+Given fixed inference cost budget:
+
+Option A: Serve 70B model in FP16
+          - High quality
+          - Expensive per token
+
+Option B: Serve 70B model in FP8/INT8  ← Likely choice for APIs
+          - Slightly lower quality
+          - 2x cheaper per token
+          - Can serve 2x more users
+
+Option C: Serve 70B model in INT4
+          - Noticeable quality drop
+          - 4x cheaper per token
+          - Usually too much quality loss for frontier APIs
+```
+
+**Summary**: Scaling laws guide *training* decisions (maximize parameters). Quantization is applied *after training* for inference efficiency. Frontier labs train the biggest model possible in full precision, then apply conservative quantization (FP8/INT8, not INT4) for serving to balance quality and cost.
