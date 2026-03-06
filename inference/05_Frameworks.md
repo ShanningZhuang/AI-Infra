@@ -352,6 +352,16 @@ response = client.chat.completions.create(
 print(response.choices[0].message.content)
 ```
 
+### Multimodal Extensions
+
+Both vLLM and SGLang are extending beyond AR-only text models to support multimodal workloads:
+
+- **vLLM Omni**: extends vLLM with multimodal input processing (VLM serving), vision encoder batching, and diffusion model inference pipelines alongside AR generation. Aims for a unified serving API across text, vision-language, and generation models.
+
+- **SGLang Diffusion**: extends SGLang with diffusion model serving, including step-level batching, CFG optimization, and integration with AR pipelines for unified models.
+
+These extensions address the fundamental challenge that multimodal models combine memory-bound AR decoding with compute-bound diffusion denoising. See [07_Multimodal_Inference.md](07_Multimodal_Inference.md) for details on why multimodal inference differs from AR-only serving.
+
 ### Key Configuration Parameters
 
 | Parameter | vLLM | TensorRT-LLM | SGLang |

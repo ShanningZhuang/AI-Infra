@@ -56,6 +56,7 @@ This means:
 |-------|------|----------|
 | Inference Frameworks | [05_Frameworks.md](05_Frameworks.md) | ★★★★★ |
 | Serving & Routing | [06_Serving.md](06_Serving.md) | ★★★★☆ |
+| Multimodal Inference | [07_Multimodal_Inference.md](07_Multimodal_Inference.md) | ★★★★☆ |
 
 ---
 
